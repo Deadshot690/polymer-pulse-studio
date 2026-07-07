@@ -13,6 +13,8 @@ import { Route as ProductsRouteImport } from './routes/products'
 import { Route as IndustriesRouteImport } from './routes/industries'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsIndexRouteImport } from './routes/products.index'
+import { Route as IndustriesIndexRouteImport } from './routes/industries.index'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 
 const ProductsRoute = ProductsRouteImport.update({
@@ -35,6 +37,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const IndustriesIndexRoute = IndustriesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => IndustriesRoute,
+} as any)
 const ProductsSlugRoute = ProductsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -44,30 +56,41 @@ const ProductsSlugRoute = ProductsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/industries': typeof IndustriesRoute
+  '/industries': typeof IndustriesRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/products/$slug': typeof ProductsSlugRoute
+  '/industries/': typeof IndustriesIndexRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/industries': typeof IndustriesRoute
-  '/products': typeof ProductsRouteWithChildren
   '/products/$slug': typeof ProductsSlugRoute
+  '/industries': typeof IndustriesIndexRoute
+  '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/industries': typeof IndustriesRoute
+  '/industries': typeof IndustriesRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/products/$slug': typeof ProductsSlugRoute
+  '/industries/': typeof IndustriesIndexRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/industries' | '/products' | '/products/$slug'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/industries'
+    | '/products'
+    | '/products/$slug'
+    | '/industries/'
+    | '/products/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/industries' | '/products' | '/products/$slug'
+  to: '/' | '/about' | '/products/$slug' | '/industries' | '/products'
   id:
     | '__root__'
     | '/'
@@ -75,12 +98,14 @@ export interface FileRouteTypes {
     | '/industries'
     | '/products'
     | '/products/$slug'
+    | '/industries/'
+    | '/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  IndustriesRoute: typeof IndustriesRoute
+  IndustriesRoute: typeof IndustriesRouteWithChildren
   ProductsRoute: typeof ProductsRouteWithChildren
 }
 
@@ -114,6 +139,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/': {
+      id: '/products/'
+      path: '/'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/industries/': {
+      id: '/industries/'
+      path: '/'
+      fullPath: '/industries/'
+      preLoaderRoute: typeof IndustriesIndexRouteImport
+      parentRoute: typeof IndustriesRoute
+    }
     '/products/$slug': {
       id: '/products/$slug'
       path: '/$slug'
@@ -124,12 +163,26 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface IndustriesRouteChildren {
+  IndustriesIndexRoute: typeof IndustriesIndexRoute
+}
+
+const IndustriesRouteChildren: IndustriesRouteChildren = {
+  IndustriesIndexRoute: IndustriesIndexRoute,
+}
+
+const IndustriesRouteWithChildren = IndustriesRoute._addFileChildren(
+  IndustriesRouteChildren,
+)
+
 interface ProductsRouteChildren {
   ProductsSlugRoute: typeof ProductsSlugRoute
+  ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
 const ProductsRouteChildren: ProductsRouteChildren = {
   ProductsSlugRoute: ProductsSlugRoute,
+  ProductsIndexRoute: ProductsIndexRoute,
 }
 
 const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
@@ -139,7 +192,7 @@ const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  IndustriesRoute: IndustriesRoute,
+  IndustriesRoute: IndustriesRouteWithChildren,
   ProductsRoute: ProductsRouteWithChildren,
 }
 export const routeTree = rootRouteImport

@@ -4,7 +4,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Section, Reveal } from "@/components/site/Section";
 import { industries } from "@/data/site";
 
-export const Route = createFileRoute("/industries")({
+export const Route = createFileRoute("/industries/")({
   head: () => ({
     meta: [
       { title: "Industries — Kohinoor Polytech" },

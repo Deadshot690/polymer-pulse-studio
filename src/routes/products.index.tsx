@@ -6,7 +6,7 @@ import { Section, SectionHeader, Reveal } from "@/components/site/Section";
 import { Input } from "@/components/ui/input";
 import { products, productCategories } from "@/data/site";
 
-export const Route = createFileRoute("/products")({
+export const Route = createFileRoute("/products/")({
   head: () => ({
     meta: [
       { title: "Products — Kohinoor Polytech" },
