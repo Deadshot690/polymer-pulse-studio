@@ -13,6 +13,7 @@ import { Route as SustainabilityRouteImport } from './routes/sustainability'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as IndustriesRouteImport } from './routes/industries'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
@@ -38,6 +39,11 @@ const ProductsRoute = ProductsRouteImport.update({
 const IndustriesRoute = IndustriesRouteImport.update({
   id: '/industries',
   path: '/industries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -74,6 +80,7 @@ const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/gallery': typeof GalleryRoute
   '/industries': typeof IndustriesRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/gallery': typeof GalleryRoute
   '/projects': typeof ProjectsRoute
   '/sustainability': typeof SustainabilityRoute
   '/industries/$slug': typeof IndustriesSlugRoute
@@ -97,6 +105,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/gallery': typeof GalleryRoute
   '/industries': typeof IndustriesRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/gallery'
     | '/industries'
     | '/products'
     | '/projects'
@@ -123,6 +133,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/gallery'
     | '/projects'
     | '/sustainability'
     | '/industries/$slug'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/gallery'
     | '/industries'
     | '/products'
     | '/projects'
@@ -146,6 +158,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  GalleryRoute: typeof GalleryRoute
   IndustriesRoute: typeof IndustriesRouteWithChildren
   ProductsRoute: typeof ProductsRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
@@ -180,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/industries'
       fullPath: '/industries'
       preLoaderRoute: typeof IndustriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -258,6 +278,7 @@ const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  GalleryRoute: GalleryRoute,
   IndustriesRoute: IndustriesRouteWithChildren,
   ProductsRoute: ProductsRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
