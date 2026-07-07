@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SustainabilityRouteImport } from './routes/sustainability'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as IndustriesRouteImport } from './routes/industries'
@@ -26,6 +27,11 @@ import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
 const SustainabilityRoute = SustainabilityRouteImport.update({
   id: '/sustainability',
   path: '/sustainability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -98,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/industries': typeof IndustriesRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sustainability': typeof SustainabilityRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/projects': typeof ProjectsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sustainability': typeof SustainabilityRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/industries': typeof IndustriesRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sustainability': typeof SustainabilityRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
@@ -144,6 +153,7 @@ export interface FileRouteTypes {
     | '/industries'
     | '/products'
     | '/projects'
+    | '/sitemap.xml'
     | '/sustainability'
     | '/industries/$slug'
     | '/products/$slug'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/gallery'
     | '/projects'
+    | '/sitemap.xml'
     | '/sustainability'
     | '/industries/$slug'
     | '/products/$slug'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/industries'
     | '/products'
     | '/projects'
+    | '/sitemap.xml'
     | '/sustainability'
     | '/industries/$slug'
     | '/products/$slug'
@@ -188,6 +200,7 @@ export interface RootRouteChildren {
   IndustriesRoute: typeof IndustriesRouteWithChildren
   ProductsRoute: typeof ProductsRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SustainabilityRoute: typeof SustainabilityRoute
 }
 
@@ -198,6 +211,13 @@ declare module '@tanstack/react-router' {
       path: '/sustainability'
       fullPath: '/sustainability'
       preLoaderRoute: typeof SustainabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects': {
@@ -324,6 +344,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndustriesRoute: IndustriesRouteWithChildren,
   ProductsRoute: ProductsRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SustainabilityRoute: SustainabilityRoute,
 }
 export const routeTree = rootRouteImport
