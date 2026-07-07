@@ -71,7 +71,7 @@ function ProductDetail() {
               <h2 className="font-display text-lg font-semibold">Technical specifications</h2>
               <table className="mt-4 w-full text-sm">
                 <tbody>
-                  {product.specs.map((s) => (
+                  {product.specs.map((s: { label: string; value: string }) => (
                     <tr key={s.label} className="border-b border-border/60 last:border-0">
                       <td className="py-3 pr-4 text-muted-foreground">{s.label}</td>
                       <td className="py-3 text-right font-medium">{s.value}</td>
