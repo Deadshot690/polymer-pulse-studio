@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import logo from "/Assets/logo_transparent_blue.png";
 import { useLead } from "@/lib/lead-context";
 
@@ -16,16 +16,33 @@ const links = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const { openLead } = useLead();
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
+    const storedTheme = window.localStorage.getItem("theme");
+    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const initialTheme = storedTheme === "dark" || (!storedTheme && systemPrefersDark) ? "dark" : "light";
+
+    setTheme(initialTheme);
+    document.documentElement.classList.toggle("dark", initialTheme === "dark");
+    document.documentElement.style.colorScheme = initialTheme;
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    document.documentElement.classList.toggle("dark", nextTheme === "dark");
+    document.documentElement.style.colorScheme = nextTheme;
+    window.localStorage.setItem("theme", nextTheme);
+  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
@@ -49,7 +66,15 @@ export function Navbar() {
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="rounded-full border border-border bg-card/70 p-2.5 text-foreground shadow-sm transition hover:bg-secondary"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
             <button onClick={() => openLead()} className="btn-primary hidden md:inline-flex">
               Request Quote
             </button>
@@ -84,6 +109,14 @@ export function Navbar() {
                   {l.label}
                 </Link>
               ))}
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="mt-2 inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card/70 px-4 py-3 text-sm font-medium text-foreground"
+              >
+                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                Toggle theme
+              </button>
               <button
                 onClick={() => {
                   setOpen(false);

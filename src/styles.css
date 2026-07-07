@@ -44,6 +44,7 @@
 
 :root {
   --radius: 0.9rem;
+  color-scheme: light;
 
   --brand: oklch(0.55 0.2 254);
   --brand-2: oklch(0.6 0.21 263);
@@ -72,6 +73,7 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: oklch(0.1 0.02 260);
   --foreground: oklch(0.97 0.005 250);
   --card: oklch(0.14 0.025 260);
@@ -105,6 +107,7 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);

@@ -23,6 +23,7 @@ function Particles({ progress }: { progress: MotionValue<number> }) {
   const count = 1800;
 
   const positions = useMemo(() => {
+    // distribute points in a spherical shell (original behavior)
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       const r = 3 + Math.random() * 2.5;
@@ -89,7 +90,8 @@ function Crystal({ progress }: { progress: MotionValue<number> }) {
 
   return (
     <mesh ref={mesh}>
-      <icosahedronGeometry args={[1.4, 0]} />
+      {/* render a proper 3D sphere so the hero shape appears round */}
+      <sphereGeometry args={[1.6, 64, 64]} />
       <meshPhysicalMaterial
         ref={mat}
         transmission={0.9}
