@@ -46,7 +46,7 @@ function IndustryDetail() {
           <div className="glass h-full rounded-2xl p-6">
             <div className="flex items-center gap-2 font-display font-semibold"><AlertTriangle className="h-5 w-5 text-brand" /> Challenges</div>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              {industry.challenges.map((c) => <li key={c}>• {c}</li>)}
+              {industry.challenges.map((c: string) => <li key={c}>• {c}</li>)}
             </ul>
           </div>
         </Reveal>
@@ -54,7 +54,7 @@ function IndustryDetail() {
           <div className="glass h-full rounded-2xl p-6">
             <div className="flex items-center gap-2 font-display font-semibold"><CheckCircle2 className="h-5 w-5 text-brand-green" /> Our solutions</div>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              {industry.solutions.map((s) => <li key={s}>• {s}</li>)}
+              {industry.solutions.map((s: string) => <li key={s}>• {s}</li>)}
             </ul>
           </div>
         </Reveal>
@@ -63,7 +63,7 @@ function IndustryDetail() {
       <div className="mt-6 glass rounded-2xl p-6">
         <div className="flex items-center gap-2 font-display font-semibold"><Boxes className="h-5 w-5 text-brand" /> Recommended grades</div>
         <div className="mt-4 flex flex-wrap gap-2">
-          {industry.grades.map((g) => <span key={g} className="chip">{g}</span>)}
+          {industry.grades.map((g: string) => <span key={g} className="chip">{g}</span>)}
         </div>
       </div>
 
