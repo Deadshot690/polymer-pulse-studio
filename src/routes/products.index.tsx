@@ -10,9 +10,17 @@ export const Route = createFileRoute("/products/")({
   head: () => ({
     meta: [
       { title: "Products — Kohinoor Polytech" },
-      { name: "description", content: "Engineered PCR PPHP, PCR PPCP and PCR HDPE granules in a comprehensive colour and grade palette." },
+      {
+        name: "description",
+        content:
+          "Engineered PCR PPHP, PCR PPCP and PCR HDPE granules in a comprehensive colour and grade palette.",
+      },
       { property: "og:title", content: "Products — Kohinoor Polytech" },
-      { property: "og:description", content: "Engineered PCR PPHP, PCR PPCP and PCR HDPE granules in a comprehensive colour and grade palette." },
+      {
+        property: "og:description",
+        content:
+          "Engineered PCR PPHP, PCR PPCP and PCR HDPE granules in a comprehensive colour and grade palette.",
+      },
     ],
   }),
   component: Products,
@@ -25,7 +33,8 @@ function Products() {
   const [q, setQ] = useState("");
 
   const filtered = products.filter(
-    (p) => (filter === "All" || p.category === filter) && p.name.toLowerCase().includes(q.toLowerCase()),
+    (p) =>
+      (filter === "All" || p.category === filter) && p.name.toLowerCase().includes(q.toLowerCase()),
   );
 
   return (
@@ -40,7 +49,14 @@ function Products() {
         <SectionHeader eyebrow="Product categories" title="Ranges for every application." />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {productCategories.map((c, i) => {
-            const Icon = c.key === "PCR PPHP" ? Boxes : c.key === "PCR PPCP" ? Recycle : c.key === "Compound" ? FlaskConical : Layers;
+            const Icon =
+              c.key === "PCR PPHP"
+                ? Boxes
+                : c.key === "PCR PPCP"
+                  ? Recycle
+                  : c.key === "Compound"
+                    ? FlaskConical
+                    : Layers;
             return (
               <Reveal key={c.name} delay={i * 0.05}>
                 <div className="glass card-lift h-full rounded-2xl p-6">
@@ -69,14 +85,23 @@ function Products() {
           </div>
           <div className="relative w-full max-w-xs">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search grades…" className="pl-9" />
+            <Input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Search grades…"
+              className="pl-9"
+            />
           </div>
         </div>
 
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.04}>
-              <Link to="/products/$slug" params={{ slug: p.slug }} className="glass card-lift block h-full rounded-2xl p-6">
+              <Link
+                to="/products/$slug"
+                params={{ slug: p.slug }}
+                className="glass card-lift block h-full rounded-2xl p-6"
+              >
                 <span className="chip">{p.tag}</span>
                 <div className="mt-4 font-display text-lg font-semibold">{p.name}</div>
                 <p className="mt-2 text-sm text-muted-foreground">{p.description}</p>
@@ -86,7 +111,9 @@ function Products() {
               </Link>
             </Reveal>
           ))}
-          {filtered.length === 0 && <p className="text-muted-foreground">No grades match your search.</p>}
+          {filtered.length === 0 && (
+            <p className="text-muted-foreground">No grades match your search.</p>
+          )}
         </div>
       </Section>
     </div>

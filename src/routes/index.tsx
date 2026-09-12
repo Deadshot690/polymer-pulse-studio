@@ -2,8 +2,22 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import {
-  ArrowRight, Leaf, Recycle, FlaskConical, Boxes, ChevronDown, Layers,
-  ShieldCheck, Gauge, Palette, Truck, Factory, Sparkles, Headset, CheckCircle2, Quote,
+  ArrowRight,
+  Leaf,
+  Recycle,
+  FlaskConical,
+  Boxes,
+  ChevronDown,
+  Layers,
+  ShieldCheck,
+  Gauge,
+  Palette,
+  Truck,
+  Factory,
+  Sparkles,
+  Headset,
+  CheckCircle2,
+  Quote,
 } from "lucide-react";
 import { Section, SectionHeader, Reveal } from "@/components/site/Section";
 import { ParticleField } from "@/components/three/ParticleField";
@@ -30,12 +44,36 @@ const features = [
 ];
 
 const loopSteps = [
-  { n: "01", t: "Plastic Waste", d: "Post-consumer & post-industrial PP streams sourced through certified channels." },
-  { n: "02", t: "Collection & Sorting", d: "Automated optical sorting separates polymers by grade and colour." },
-  { n: "03", t: "Cleaning & Processing", d: "Multi-stage washing removes contaminants below industry thresholds." },
-  { n: "04", t: "Granule Production", d: "Twin-screw extrusion yields uniform pellets with controlled MFI." },
-  { n: "05", t: "Manufacturing", d: "Granules ship to OEMs and manufacturers across seven industries." },
-  { n: "06", t: "Consumer Products", d: "Recycled-content products re-enter the loop, closing the cycle." },
+  {
+    n: "01",
+    t: "Plastic Waste",
+    d: "Post-consumer & post-industrial PP streams sourced through certified channels.",
+  },
+  {
+    n: "02",
+    t: "Collection & Sorting",
+    d: "Automated optical sorting separates polymers by grade and colour.",
+  },
+  {
+    n: "03",
+    t: "Cleaning & Processing",
+    d: "Multi-stage washing removes contaminants below industry thresholds.",
+  },
+  {
+    n: "04",
+    t: "Granule Production",
+    d: "Twin-screw extrusion yields uniform pellets with controlled MFI.",
+  },
+  {
+    n: "05",
+    t: "Manufacturing",
+    d: "Granules ship to OEMs and manufacturers across seven industries.",
+  },
+  {
+    n: "06",
+    t: "Consumer Products",
+    d: "Recycled-content products re-enter the loop, closing the cycle.",
+  },
 ];
 
 const reasons = [
@@ -51,14 +89,44 @@ const reasons = [
 
 const swatches = [
   { name: "Blue", hex: "#2563eb", image: "/Polymers-photos/IMG_1554.jpg", grade: "PCR PPCP Blue" },
-  { name: "Green", hex: "#22c55e", image: "/Polymers-photos/IMG_1574.jpg", grade: "PCR PPHP Green" },
+  {
+    name: "Green",
+    hex: "#22c55e",
+    image: "/Polymers-photos/IMG_1574.jpg",
+    grade: "PCR PPHP Green",
+  },
   { name: "Red", hex: "#ef4444", image: "/Polymers-photos/IMG_1549.jpg", grade: "PCR PPCP Red" },
-  { name: "Orange", hex: "#f97316", image: "/Polymers-photos/IMG_1578.jpg", grade: "PCR PPHP Orange" },
-  { name: "Maroon", hex: "#7f1d1d", image: "/Polymers-photos/IMG_1550.jpg", grade: "PCR PPCP Maroon" },
-  { name: "White", hex: "#f5f5f5", image: "/Polymers-photos/IMG_1536.jpg", grade: "PCR HDPE Natural White" },
-  { name: "Black", hex: "#1a1a1a", image: "/Polymers-photos/IMG_1545.jpg", grade: "PCR PPCP Jet Black" },
+  {
+    name: "Orange",
+    hex: "#f97316",
+    image: "/Polymers-photos/IMG_1578.jpg",
+    grade: "PCR PPHP Orange",
+  },
+  {
+    name: "Maroon",
+    hex: "#7f1d1d",
+    image: "/Polymers-photos/IMG_1550.jpg",
+    grade: "PCR PPCP Maroon",
+  },
+  {
+    name: "White",
+    hex: "#f5f5f5",
+    image: "/Polymers-photos/IMG_1536.jpg",
+    grade: "PCR HDPE Natural White",
+  },
+  {
+    name: "Black",
+    hex: "#1a1a1a",
+    image: "/Polymers-photos/IMG_1545.jpg",
+    grade: "PCR PPCP Jet Black",
+  },
   { name: "Cyan", hex: "#06b6d4", image: "/Polymers-photos/IMG_1583.jpg", grade: "PCR PPHP Cyan" },
-  { name: "Yellow", hex: "#eab308", image: "/Polymers-photos/IMG_1585.jpg", grade: "PCR PPCP Golden Yellow" },
+  {
+    name: "Yellow",
+    hex: "#eab308",
+    image: "/Polymers-photos/IMG_1585.jpg",
+    grade: "PCR PPCP Golden Yellow",
+  },
 ];
 
 const mfgStats = [
@@ -106,59 +174,110 @@ function Home() {
   const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const canvasScale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
 
+  const heroSequence = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.08,
+      },
+    },
+  };
+
+  const heroItem = {
+    hidden: { opacity: 0, y: 24 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+    },
+  };
+
   return (
     <div>
       {/* HERO */}
       <div ref={heroRef} className="relative min-h-[100vh] overflow-hidden">
         <div className="grid-bg absolute inset-0 opacity-30" />
-        <motion.div style={{ scale: canvasScale }} className="absolute inset-0">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          style={{ scale: canvasScale }}
+          className="absolute inset-0"
+        >
           <ParticleField progress={scrollYProgress} />
         </motion.div>
         <div
-          className="pointer-events-none absolute left-1/2 top-1/3 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-3xl"
-          style={{ background: "radial-gradient(circle, color-mix(in oklab, var(--brand) 22%, transparent), transparent 70%)" }}
+          className="pointer-events-none absolute left-1/2 top-1/3 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-3xl transition-opacity duration-1000"
+          style={{
+            background:
+              "radial-gradient(circle, color-mix(in oklab, var(--brand) 22%, transparent), transparent 70%)",
+          }}
         />
         <motion.div
           style={{ y: textY, opacity: textOpacity }}
+          variants={heroSequence}
+          initial="hidden"
+          animate="show"
           className="relative mx-auto flex min-h-[100vh] max-w-5xl flex-col items-center justify-center px-5 text-center"
         >
-          <div className="chip">
-            <Sparkles className="h-3.5 w-3.5" />
+          <motion.div variants={heroItem} className="chip">
+            <Sparkles className="h-3.5 w-3.5 text-brand" />
             <span>Industrial PCR & High-Performance Compounds</span>
-          </div>
+          </motion.div>
 
-          <h1 className="mt-6 font-display text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
+          <motion.h1
+            variants={heroItem}
+            className="mt-6 font-display text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl"
+          >
             Engineering sustainable polymers for the{" "}
             <span className="text-gradient">modern industry.</span>
-          </h1>
+          </motion.h1>
 
-          <p className="mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            High-purity recycled granules that drop into existing manufacturing lines. Consistent MFI, high tensile strength, and zero virgin compromise.
-          </p>
+          <motion.p
+            variants={heroItem}
+            className="mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg"
+          >
+            High-purity recycled granules that drop into existing manufacturing lines. Consistent
+            MFI, high tensile strength, and zero virgin compromise.
+          </motion.p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link to="/products" className="btn-primary">
-              Explore products <ArrowRight className="h-4 w-4" />
+          <motion.div variants={heroItem} className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link to="/products" className="btn-primary group">
+              <span>Explore products</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
             <button onClick={() => openLead()} className="btn-ghost">
               Request sample batch
             </button>
-          </div>
+          </motion.div>
 
           {/* Quick Stats Grid */}
-          <div className="mt-14 grid w-full max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+          <motion.div
+            variants={heroItem}
+            className="mt-14 grid w-full max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4"
+          >
             {stats.map((s) => (
-              <div key={s.l} className="glass rounded-2xl p-4 text-center">
-                <div className="font-numeric text-2xl font-bold text-gradient sm:text-3xl">{s.v}</div>
+              <div
+                key={s.l}
+                className="glass rounded-2xl p-4 text-center transition-all duration-300 hover:border-brand/40 hover:-translate-y-1"
+              >
+                <div className="font-numeric text-2xl font-bold text-gradient sm:text-3xl">
+                  {s.v}
+                </div>
                 <div className="mt-1 text-xs text-muted-foreground">{s.l}</div>
               </div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="mt-10 flex flex-col items-center gap-2 text-xs text-muted-foreground">
+          <motion.div
+            variants={heroItem}
+            className="mt-10 flex flex-col items-center gap-2 text-xs text-muted-foreground"
+          >
             <span>Scroll to explore</span>
-            <ChevronDown className="h-4 w-4 animate-bounce" />
-          </div>
+            <ChevronDown className="h-4 w-4 animate-bounce opacity-75" />
+          </motion.div>
         </motion.div>
       </div>
 
@@ -172,16 +291,20 @@ function Home() {
               subtitle="Kohinoor Polytech converts post-consumer and post-industrial polymers into premium and polyethylene into premium PPHP, PPCP, HDPE and custom-engineered compounds. Every batch is validated for impurity control and colour consistency before it leaves our plant."
             />
             <div className="mt-8 grid grid-cols-2 gap-3">
-              {features.map((f) => (
-                <div key={f.t} className="glass card-lift rounded-2xl p-5">
-                  <f.icon className="h-6 w-6 text-brand" />
-                  <div className="mt-3 font-display font-semibold">{f.t}</div>
-                  <div className="text-sm text-muted-foreground">{f.s}</div>
-                </div>
+              {features.map((f, i) => (
+                <Reveal key={f.t} delay={i * 0.06}>
+                  <div className="glass card-lift rounded-2xl p-5 group h-full">
+                    <f.icon className="h-6 w-6 text-brand transition-transform duration-300 group-hover:scale-110" />
+                    <div className="mt-3 font-display font-semibold transition-colors duration-200 group-hover:text-brand">
+                      {f.t}
+                    </div>
+                    <div className="text-sm text-muted-foreground">{f.s}</div>
+                  </div>
+                </Reveal>
               ))}
             </div>
           </div>
-          <Reveal>
+          <Reveal delay={0.15}>
             <div
               onMouseEnter={() => setIsAutoPlaying(false)}
               onMouseLeave={() => setIsAutoPlaying(true)}
@@ -189,8 +312,12 @@ function Home() {
             >
               <div className="mb-3.5 flex items-center justify-between px-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-foreground">{selectedSwatch.name} Sample</span>
-                  <span className="chip text-[11px] py-0.5 px-2 font-mono">{selectedSwatch.grade}</span>
+                  <span className="text-sm font-semibold text-foreground">
+                    {selectedSwatch.name} Sample
+                  </span>
+                  <span className="chip text-[11px] py-0.5 px-2 font-mono">
+                    {selectedSwatch.grade}
+                  </span>
                   {isAutoPlaying && (
                     <span className="hidden sm:inline-flex items-center gap-1 text-[11px] text-muted-foreground ml-1">
                       <span className="h-1.5 w-1.5 rounded-full bg-brand-green animate-pulse" />
@@ -203,7 +330,9 @@ function Home() {
                     type="button"
                     onClick={() => setPreviewMode("photo")}
                     className={`rounded-full px-2.5 py-1 font-medium transition-all ${
-                      previewMode === "photo" ? "bg-card text-foreground shadow-xs" : "text-muted-foreground hover:text-foreground"
+                      previewMode === "photo"
+                        ? "bg-card text-foreground shadow-xs"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     Photo
@@ -212,7 +341,9 @@ function Home() {
                     type="button"
                     onClick={() => setPreviewMode("3d")}
                     className={`rounded-full px-2.5 py-1 font-medium transition-all ${
-                      previewMode === "3d" ? "bg-card text-foreground shadow-xs" : "text-muted-foreground hover:text-foreground"
+                      previewMode === "3d"
+                        ? "bg-card text-foreground shadow-xs"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     3D View
@@ -225,10 +356,10 @@ function Home() {
                   {previewMode === "photo" ? (
                     <motion.div
                       key={selectedSwatch.name}
-                      initial={{ opacity: 0, scale: 0.96 }}
+                      initial={{ opacity: 0, scale: 0.98 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 1.04 }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      exit={{ opacity: 0, scale: 1.02 }}
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                       className="relative h-full w-full"
                     >
                       <img
@@ -313,10 +444,22 @@ function Home() {
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {loopSteps.map((s, i) => (
             <Reveal key={s.n} delay={i * 0.05}>
-              <div className="glass card-lift h-full rounded-2xl p-6">
-                <div className="font-numeric text-3xl font-bold text-gradient">{s.n}</div>
-                <div className="mt-2 font-display text-lg font-semibold">{s.t}</div>
-                <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
+              <div className="glass card-lift group relative flex h-full flex-col justify-between rounded-2xl p-6 transition-all duration-300 hover:border-brand/40">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-numeric text-3xl font-bold text-gradient transition-transform duration-300 group-hover:scale-105">
+                      {s.n}
+                    </span>
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground/70">
+                      Step 0{i + 1}
+                    </span>
+                  </div>
+                  <div className="mt-3 font-display text-lg font-semibold text-foreground transition-colors duration-200 group-hover:text-brand">
+                    {s.t}
+                  </div>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
+                </div>
+                <div className="mt-4 h-[2px] w-0 bg-gradient-to-r from-brand to-brand-green transition-all duration-300 group-hover:w-full" />
               </div>
             </Reveal>
           ))}
@@ -325,13 +468,19 @@ function Home() {
 
       {/* WHY KOHINOOR */}
       <Section className="border-t border-border">
-        <SectionHeader center eyebrow="Why Kohinoor" title="Eight reasons manufacturers choose us." />
+        <SectionHeader
+          center
+          eyebrow="Why Kohinoor"
+          title="Eight reasons manufacturers choose us."
+        />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {reasons.map((r, i) => (
             <Reveal key={r.t} delay={i * 0.04}>
-              <div className="glass card-lift flex h-full flex-col items-start gap-3 rounded-2xl p-6">
-                <r.icon className="h-6 w-6 text-brand-green" />
-                <div className="font-display font-semibold">{r.t}</div>
+              <div className="glass card-lift group flex h-full flex-col items-start gap-3 rounded-2xl p-6 transition-all duration-300 hover:border-brand-green/40">
+                <r.icon className="h-6 w-6 text-brand-green transition-transform duration-300 group-hover:scale-110" />
+                <div className="font-display font-semibold transition-colors duration-200 group-hover:text-foreground">
+                  {r.t}
+                </div>
               </div>
             </Reveal>
           ))}
@@ -340,23 +489,44 @@ function Home() {
 
       {/* PRODUCT CATEGORIES */}
       <Section className="border-t border-border">
-        <SectionHeader eyebrow="Product categories" title="Engineered polymer ranges for every application." />
+        <SectionHeader
+          eyebrow="Product categories"
+          title="Engineered polymer ranges for every application."
+        />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {productCategories.map((c, i) => {
-            const Icon = c.key === "PCR PPHP" ? Boxes : c.key === "PCR PPCP" ? Recycle : c.key === "Compound" ? FlaskConical : Layers;
+            const Icon =
+              c.key === "PCR PPHP"
+                ? Boxes
+                : c.key === "PCR PPCP"
+                  ? Recycle
+                  : c.key === "Compound"
+                    ? FlaskConical
+                    : Layers;
             return (
               <Reveal key={c.name} delay={i * 0.05}>
-                <div className="glass card-lift h-full rounded-2xl p-6">
-                  <Icon className="h-6 w-6 text-brand" />
-                  <div className="mt-3 font-display text-lg font-semibold">{c.name}</div>
-                  <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
+                <div className="glass card-lift group flex h-full flex-col justify-between rounded-2xl p-6 transition-all duration-300 hover:border-brand/40">
+                  <div>
+                    <Icon className="h-6 w-6 text-brand transition-transform duration-300 group-hover:scale-110" />
+                    <div className="mt-3 font-display text-lg font-semibold transition-colors duration-200 group-hover:text-brand">
+                      {c.name}
+                    </div>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+                  </div>
+                  <div className="mt-5 flex items-center gap-1.5 text-xs font-semibold text-brand transition-colors group-hover:text-foreground">
+                    <span>Explore grade</span>
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                  </div>
                 </div>
               </Reveal>
             );
           })}
         </div>
         <div className="mt-8">
-          <Link to="/products" className="btn-primary">View the full catalogue <ArrowRight className="h-4 w-4" /></Link>
+          <Link to="/products" className="btn-primary group">
+            <span>View the full catalogue</span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+          </Link>
         </div>
       </Section>
 
@@ -368,7 +538,10 @@ function Home() {
         />
         <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-5">
           {mfgStats.map((s) => (
-            <div key={s.l} className="glass rounded-2xl p-5 text-center">
+            <div
+              key={s.l}
+              className="glass card-lift rounded-2xl p-5 text-center transition-all duration-300 hover:border-brand/40"
+            >
               <div className="font-numeric text-2xl font-bold text-gradient">{s.v}</div>
               <div className="mt-1 text-xs text-muted-foreground">{s.l}</div>
             </div>
@@ -386,7 +559,10 @@ function Home() {
           />
           <div className="grid grid-cols-2 gap-3">
             {susStats.map((s) => (
-              <div key={s.l} className="glass card-lift rounded-2xl p-5">
+              <div
+                key={s.l}
+                className="glass card-lift rounded-2xl p-5 transition-all duration-300 hover:border-brand-green/40"
+              >
                 <div className="font-numeric text-2xl font-bold text-brand-green">{s.v}</div>
                 <div className="mt-1 text-xs text-muted-foreground">{s.l}</div>
               </div>
@@ -394,7 +570,10 @@ function Home() {
           </div>
         </div>
         <div className="mt-8">
-          <Link to="/sustainability" className="btn-accent">Explore sustainability <ArrowRight className="h-4 w-4" /></Link>
+          <Link to="/sustainability" className="btn-accent group">
+            <span>Explore sustainability</span>
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+          </Link>
         </div>
       </Section>
 
@@ -404,11 +583,14 @@ function Home() {
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           {testimonials.map((t, i) => (
             <Reveal key={i} delay={i * 0.06}>
-              <div className="glass card-lift h-full rounded-2xl p-6">
-                <Quote className="h-7 w-7 text-brand" />
-                <p className="mt-4 text-base">{t}</p>
-                <div className="mt-4 flex items-center gap-1 text-brand-green">
-                  <CheckCircle2 className="h-4 w-4" /><span className="text-xs">Verified customer</span>
+              <div className="glass card-lift group flex h-full flex-col justify-between rounded-2xl p-6 transition-all duration-300 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/5">
+                <div>
+                  <Quote className="h-7 w-7 text-brand transition-transform duration-300 group-hover:scale-110" />
+                  <p className="mt-4 text-base leading-relaxed text-foreground/90">{t}</p>
+                </div>
+                <div className="mt-6 flex items-center gap-1 text-brand-green pt-4 border-t border-border/50">
+                  <CheckCircle2 className="h-4 w-4" />
+                  <span className="text-xs font-medium">Verified industrial customer</span>
                 </div>
               </div>
             </Reveal>
@@ -418,20 +600,32 @@ function Home() {
 
       {/* FINAL CTA */}
       <Section className="border-t border-border">
-        <div className="glass-strong relative overflow-hidden rounded-3xl p-10 text-center md:p-16">
-          <div
-            className="pointer-events-none absolute -top-20 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full blur-3xl"
-            style={{ background: "radial-gradient(circle, color-mix(in oklab, var(--brand) 40%, transparent), transparent 70%)" }}
-          />
-          <h2 className="relative text-3xl font-bold md:text-5xl">Ready to build your next polymer solution?</h2>
-          <p className="relative mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Let's discuss grades, colour, supply volume and application performance.
-          </p>
-          <div className="relative mt-8 flex flex-wrap justify-center gap-3">
-            <button onClick={() => openLead()} className="btn-primary">Request a Quote</button>
-            <Link to="/contact" className="btn-ghost">Contact Sales</Link>
+        <Reveal>
+          <div className="glass-strong relative overflow-hidden rounded-3xl p-10 text-center md:p-16 border border-border/80 shadow-2xl">
+            <div
+              className="pointer-events-none absolute -top-20 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full blur-3xl animate-pulse duration-1000"
+              style={{
+                background:
+                  "radial-gradient(circle, color-mix(in oklab, var(--brand) 40%, transparent), transparent 70%)",
+              }}
+            />
+            <h2 className="relative text-3xl font-bold md:text-5xl">
+              Ready to build your next polymer solution?
+            </h2>
+            <p className="relative mx-auto mt-4 max-w-2xl text-muted-foreground">
+              Let's discuss grades, colour, supply volume and application performance.
+            </p>
+            <div className="relative mt-8 flex flex-wrap justify-center gap-3">
+              <button onClick={() => openLead()} className="btn-primary group">
+                <span>Request a Quote</span>
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </button>
+              <Link to="/contact" className="btn-ghost">
+                Contact Sales
+              </Link>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </Section>
     </div>
   );

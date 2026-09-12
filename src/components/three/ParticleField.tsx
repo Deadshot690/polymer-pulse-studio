@@ -110,7 +110,11 @@ export function ParticleField({ progress }: { progress?: MotionValue<number> }) 
   const fallback = useMotionValue(0);
   const p = progress ?? fallback;
   return (
-    <Canvas camera={{ position: [0, 0, 8], fov: 45 }} dpr={[1, 2]} gl={{ alpha: true, antialias: true }}>
+    <Canvas
+      camera={{ position: [0, 0, 8], fov: 45 }}
+      dpr={[1, 2]}
+      gl={{ alpha: true, antialias: true }}
+    >
       <ambientLight intensity={0.6} />
       <directionalLight position={[5, 5, 5]} intensity={1.2} />
       <directionalLight position={[-5, -3, -5]} intensity={0.5} color="#22c55e" />

@@ -60,6 +60,17 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && open) {
+        setOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
+
   // When mobile menu is opened, keep full width so dropdown is comfortably viewed
   const effectiveCollapsed = isCollapsed && !open;
 
@@ -91,9 +102,7 @@ export function Navbar() {
       >
         <nav
           className={`flex items-center justify-between transition-all duration-300 ${
-            effectiveCollapsed
-              ? "px-4 py-2 md:px-5 md:py-2"
-              : "mx-auto max-w-7xl px-5 py-3 md:px-8"
+            effectiveCollapsed ? "px-4 py-2 md:px-5 md:py-2" : "mx-auto max-w-7xl px-5 py-3 md:px-8"
           }`}
         >
           {/* Logo & Brand */}
@@ -104,13 +113,13 @@ export function Navbar() {
               alt="Kohinoor Polytech"
               width={36}
               height={36}
-              className={`object-contain transition-transform duration-200 group-hover:scale-105 ${
+              className={`object-contain transition-transform duration-300 group-hover:scale-105 ${
                 effectiveCollapsed ? "h-8 w-8" : "h-9 w-9"
               }`}
             />
             <motion.span
               layout
-              className={`font-display font-bold tracking-tight text-foreground transition-all duration-200 ${
+              className={`font-display font-bold tracking-tight text-foreground transition-all duration-300 ${
                 effectiveCollapsed ? "text-base md:text-lg" : "text-lg md:text-xl"
               }`}
             >
@@ -124,8 +133,8 @@ export function Navbar() {
               <Link
                 key={l.to}
                 to={l.to}
-                className={`rounded-full px-3.5 py-1.5 text-sm font-medium text-muted-foreground transition-all hover:text-foreground hover:bg-secondary/70 ${
-                  effectiveCollapsed ? "text-xs px-3 py-1.2" : "text-sm px-4 py-2"
+                className={`relative rounded-full font-medium text-muted-foreground transition-all duration-200 hover:text-foreground hover:bg-secondary/70 ${
+                  effectiveCollapsed ? "text-xs px-3 py-1.5" : "text-sm px-4 py-2"
                 }`}
                 activeProps={{
                   className: "text-foreground font-semibold bg-secondary/80 shadow-xs",
@@ -171,31 +180,43 @@ export function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25, ease: "easeInOut" }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               className="glass-strong border-t border-border/60 overflow-hidden lg:hidden"
             >
               <div className="flex flex-col gap-1 px-5 py-4">
-                {links.map((l) => (
-                  <Link
+                {links.map((l, i) => (
+                  <motion.div
                     key={l.to}
-                    to={l.to}
-                    onClick={() => setOpen(false)}
-                    className="rounded-xl px-4 py-3 text-base font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
-                    activeProps={{ className: "bg-secondary/80 font-semibold text-foreground" }}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.04, duration: 0.2, ease: "easeOut" }}
                   >
-                    {l.label}
-                  </Link>
+                    <Link
+                      to={l.to}
+                      onClick={() => setOpen(false)}
+                      className="block rounded-xl px-4 py-3 text-base font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
+                      activeProps={{ className: "bg-secondary/80 font-semibold text-foreground" }}
+                    >
+                      {l.label}
+                    </Link>
+                  </motion.div>
                 ))}
-                <button
-                  onClick={() => {
-                    setOpen(false);
-                    openLead();
-                  }}
-                  className="btn-primary mt-3 flex items-center justify-center gap-1.5 w-full py-3"
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: links.length * 0.04, duration: 0.2 }}
                 >
-                  <span>Request Quote</span>
-                  <ArrowUpRight className="h-4 w-4" />
-                </button>
+                  <button
+                    onClick={() => {
+                      setOpen(false);
+                      openLead();
+                    }}
+                    className="btn-primary mt-3 flex items-center justify-center gap-1.5 w-full py-3"
+                  >
+                    <span>Request Quote</span>
+                    <ArrowUpRight className="h-4 w-4" />
+                  </button>
+                </motion.div>
               </div>
             </motion.div>
           )}

@@ -1,7 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight, Maximize2, Sparkles, Image as ImageIcon } from "lucide-react";
+import {
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Maximize2,
+  Sparkles,
+  Image as ImageIcon,
+} from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Section, Reveal } from "@/components/site/Section";
 
@@ -9,9 +16,17 @@ export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
       { title: "Gallery — Kohinoor Polytech" },
-      { name: "description", content: "A visual look inside our facility, polymer granules, extrusion lines and testing labs." },
+      {
+        name: "description",
+        content:
+          "A visual look inside our facility, polymer granules, extrusion lines and testing labs.",
+      },
       { property: "og:title", content: "Gallery — Kohinoor Polytech" },
-      { property: "og:description", content: "A visual look inside our facility, polymer granules, extrusion lines and testing labs." },
+      {
+        property: "og:description",
+        content:
+          "A visual look inside our facility, polymer granules, extrusion lines and testing labs.",
+      },
     ],
   }),
   component: Gallery,
@@ -72,7 +87,9 @@ function Gallery() {
   }, []);
 
   const handlePrev = useCallback(() => {
-    setActiveIdx((curr) => (curr !== null ? (curr - 1 + galleryPhotos.length) % galleryPhotos.length : null));
+    setActiveIdx((curr) =>
+      curr !== null ? (curr - 1 + galleryPhotos.length) % galleryPhotos.length : null,
+    );
   }, []);
 
   const handleClose = useCallback(() => {
@@ -104,7 +121,11 @@ function Gallery() {
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
             <ImageIcon className="h-4 w-4 text-brand" />
-            <span>Showing <strong className="text-foreground font-semibold">{galleryPhotos.length}</strong> verified gallery photos</span>
+            <span>
+              Showing{" "}
+              <strong className="text-foreground font-semibold">{galleryPhotos.length}</strong>{" "}
+              verified gallery photos
+            </span>
           </div>
           <span className="chip hidden sm:inline-flex">
             <Sparkles className="h-3 w-3 text-brand" />
@@ -132,9 +153,7 @@ function Gallery() {
                       <Maximize2 className="h-4 w-4" />
                     </span>
                   </div>
-                  <span className="text-xs font-medium text-white/90">
-                    Photo {i + 1}
-                  </span>
+                  <span className="text-xs font-medium text-white/90">Photo {i + 1}</span>
                 </div>
               </div>
             </Reveal>

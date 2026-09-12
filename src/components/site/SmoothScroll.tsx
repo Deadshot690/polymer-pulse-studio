@@ -10,13 +10,13 @@ export function SmoothScroll() {
     if (prefersReducedMotion) return;
 
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 1.05,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1.2,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.0,
       infinite: false,
     });
 
@@ -29,7 +29,23 @@ export function SmoothScroll() {
     }
     rafId = requestAnimationFrame(raf);
 
+    // Support smooth anchor link scrolling
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement)?.closest('a[href^="#"]');
+      if (!target) return;
+      const href = target.getAttribute("href");
+      if (href && href.length > 1) {
+        const el = document.querySelector(href);
+        if (el) {
+          e.preventDefault();
+          lenis.scrollTo(el as HTMLElement, { offset: -70, duration: 0.9 });
+        }
+      }
+    };
+    document.addEventListener("click", handleAnchorClick);
+
     return () => {
+      document.removeEventListener("click", handleAnchorClick);
       cancelAnimationFrame(rafId);
       lenis.destroy();
       delete (window as unknown as { __lenis?: Lenis }).__lenis;

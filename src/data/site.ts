@@ -99,10 +99,26 @@ export const products: Product[] = [
 ];
 
 export const productCategories = [
-  { name: "PCR PP Homopolymer (PCR PPHP)", key: "PCR PPHP", desc: "Stiff, high-purity homopolymer grades for injection, raffia and extrusion." },
-  { name: "PCR PP Copolymer (PCR PPCP)", key: "PCR PPCP", desc: "Impact-resistant copolymer grades for automotive and packaging." },
-  { name: "PCR High-Density Polyethylene (PCR HDPE)", key: "PCR HDPE", desc: "Durable HDPE grades for blow moulding, pipes, drums and extrusion." },
-  { name: "Custom Compounds", key: "Compound", desc: "Filled and reinforced compounds engineered to your specification." },
+  {
+    name: "PCR PP Homopolymer (PCR PPHP)",
+    key: "PCR PPHP",
+    desc: "Stiff, high-purity homopolymer grades for injection, raffia and extrusion.",
+  },
+  {
+    name: "PCR PP Copolymer (PCR PPCP)",
+    key: "PCR PPCP",
+    desc: "Impact-resistant copolymer grades for automotive and packaging.",
+  },
+  {
+    name: "PCR High-Density Polyethylene (PCR HDPE)",
+    key: "PCR HDPE",
+    desc: "Durable HDPE grades for blow moulding, pipes, drums and extrusion.",
+  },
+  {
+    name: "Custom Compounds",
+    key: "Compound",
+    desc: "Filled and reinforced compounds engineered to your specification.",
+  },
 ];
 
 export interface Industry {
@@ -120,12 +136,21 @@ export const industries: Industry[] = [
     slug: "automotive",
     name: "Automotive",
     blurb: "Impact-grade copolymers for interior and under-hood components.",
-    challenges: ["Low-temperature impact resistance", "Dimensional stability", "Consistent surface finish"],
-    solutions: ["Impact-modified PCR PPCP grades", "In-line MFI monitoring", "Custom colour matching"],
+    challenges: [
+      "Low-temperature impact resistance",
+      "Dimensional stability",
+      "Consistent surface finish",
+    ],
+    solutions: [
+      "Impact-modified PCR PPCP grades",
+      "In-line MFI monitoring",
+      "Custom colour matching",
+    ],
     grades: ["PCR PPCP Impact Grade — Black", "Custom Compound — Glass Filled"],
     caseStudy: {
       problem: "An OEM needed a recycled-content grade with stable impact for interior trim.",
-      solution: "We supplied an impact-modified PCR PPCP with validated low-temperature performance.",
+      solution:
+        "We supplied an impact-modified PCR PPCP with validated low-temperature performance.",
       result: "15% cost reduction with no drop in part quality.",
     },
   },
@@ -202,12 +227,14 @@ export const CONTACT = {
   phoneRaw: "919033118051",
   phone2: "+91 86752 78692",
   phone2Raw: "918675278692",
-  address: "Plot No. 111-114, Tasnim Nagar, Unn Industrial Estate, behind Sanabil Bakery, Sachin Naka, Surat - 394210, Gujarat",
+  address:
+    "Plot No. 111-114, Tasnim Nagar, Unn Industrial Estate, behind Sanabil Bakery, Sachin Naka, Surat - 394210, Gujarat",
   linkedin: "https://www.linkedin.com/company/pcrpolymersllp/",
 };
 
-export const whatsappUrl = (msg = "Hello Kohinoor Polytech, I'd like to inquire about your products.") =>
-  `https://wa.me/${CONTACT.phoneRaw}?text=${encodeURIComponent(msg)}`;
+export const whatsappUrl = (
+  msg = "Hello Kohinoor Polytech, I'd like to inquire about your products.",
+) => `https://wa.me/${CONTACT.phoneRaw}?text=${encodeURIComponent(msg)}`;
 
 export const mapUrl = () =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT.address)}`;

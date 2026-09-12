@@ -9,16 +9,22 @@ export const Route = createFileRoute("/sitemap.xml")({
     handlers: {
       GET: async () => {
         const staticPaths = [
-          "/", "/about", "/products", "/sustainability",
-          "/projects", "/gallery", "/contact",
+          "/",
+          "/about",
+          "/products",
+          "/sustainability",
+          "/projects",
+          "/gallery",
+          "/contact",
         ];
-        const dynamic = [
-          ...products.map((p) => `/products/${p.slug}`),
-        ];
+        const dynamic = [...products.map((p) => `/products/${p.slug}`)];
         const all = [...staticPaths, ...dynamic];
 
         const urls = all
-          .map((p) => `  <url>\n    <loc>${BASE_URL}${p}</loc>\n    <changefreq>weekly</changefreq>\n  </url>`)
+          .map(
+            (p) =>
+              `  <url>\n    <loc>${BASE_URL}${p}</loc>\n    <changefreq>weekly</changefreq>\n  </url>`,
+          )
           .join("\n");
 
         const xml = [
