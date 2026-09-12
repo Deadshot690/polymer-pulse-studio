@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
-  ArrowRight, Leaf, Recycle, FlaskConical, Boxes, ChevronDown,
+  ArrowRight, Leaf, Recycle, FlaskConical, Boxes, ChevronDown, Layers,
   ShieldCheck, Gauge, Palette, Truck, Factory, Sparkles, Headset, CheckCircle2, Quote,
 } from "lucide-react";
 import { Section, SectionHeader, Reveal } from "@/components/site/Section";
@@ -23,10 +23,10 @@ const stats = [
 ];
 
 const features = [
-  { icon: Boxes, t: "Homopolymer", s: "PPHP" },
-  { icon: Recycle, t: "Copolymer", s: "PPCP" },
+  { icon: Boxes, t: "Homopolymer", s: "PCR PPHP" },
+  { icon: Recycle, t: "Copolymer", s: "PCR PPCP" },
   { icon: FlaskConical, t: "Compounds", s: "Custom" },
-  { icon: Palette, t: "Masterbatch", s: "Colour" },
+  { icon: Layers, t: "HDPE", s: "PCR HDPE / Blow & Extrusion" },
 ];
 
 const loopSteps = [
@@ -34,7 +34,7 @@ const loopSteps = [
   { n: "02", t: "Collection & Sorting", d: "Automated optical sorting separates polymers by grade and colour." },
   { n: "03", t: "Cleaning & Processing", d: "Multi-stage washing removes contaminants below industry thresholds." },
   { n: "04", t: "Granule Production", d: "Twin-screw extrusion yields uniform pellets with controlled MFI." },
-  { n: "05", t: "Manufacturing", d: "Granules ship to OEMs and converters across seven industries." },
+  { n: "05", t: "Manufacturing", d: "Granules ship to OEMs and manufacturers across seven industries." },
   { n: "06", t: "Consumer Products", d: "Recycled-content products re-enter the loop, closing the cycle." },
 ];
 
@@ -143,7 +143,7 @@ function Home() {
             <SectionHeader
               eyebrow="Who we are"
               title="A polymer engineering company built around the circular economy."
-              subtitle="Kohinoor Polytech converts post-consumer and post-industrial polypropylene into premium PPHP, PPCP and custom-engineered compounds. Every batch is validated for MFI stability, impurity control and colour consistency before it leaves our plant."
+              subtitle="Kohinoor Polytech converts post-consumer and post-industrial polypropylene and polyethylene into premium PCR PPHP, PCR PPCP, PCR HDPE and custom-engineered compounds. Every batch is validated for MFI stability, impurity control and colour consistency before it leaves our plant."
             />
             <div className="mt-8 grid grid-cols-2 gap-3">
               {features.map((f) => (
@@ -203,7 +203,7 @@ function Home() {
 
       {/* WHY KOHINOOR */}
       <Section className="border-t border-border">
-        <SectionHeader center eyebrow="Why Kohinoor" title="Eight reasons converters choose us." />
+        <SectionHeader center eyebrow="Why Kohinoor" title="Eight reasons manufacturers choose us." />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {reasons.map((r, i) => (
             <Reveal key={r.t} delay={i * 0.04}>
@@ -219,16 +219,19 @@ function Home() {
       {/* PRODUCT CATEGORIES */}
       <Section className="border-t border-border">
         <SectionHeader eyebrow="Product categories" title="Engineered polymer ranges for every application." />
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {productCategories.slice(0, 3).map((c, i) => (
-            <Reveal key={c.name} delay={i * 0.05}>
-              <div className="glass card-lift h-full rounded-2xl p-6">
-                <Boxes className="h-6 w-6 text-brand" />
-                <div className="mt-3 font-display text-lg font-semibold">{c.name}</div>
-                <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {productCategories.map((c, i) => {
+            const Icon = c.key === "PCR PPHP" ? Boxes : c.key === "PCR PPCP" ? Recycle : c.key === "Compound" ? FlaskConical : Layers;
+            return (
+              <Reveal key={c.name} delay={i * 0.05}>
+                <div className="glass card-lift h-full rounded-2xl p-6">
+                  <Icon className="h-6 w-6 text-brand" />
+                  <div className="mt-3 font-display text-lg font-semibold">{c.name}</div>
+                  <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
         <div className="mt-8">
           <Link to="/products" className="btn-primary">View the full catalogue <ArrowRight className="h-4 w-4" /></Link>

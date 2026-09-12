@@ -46,7 +46,7 @@ function About() {
       <PageHero
         eyebrow="About Kohinoor"
         title="A sustainable polymer engineering company."
-        subtitle="We convert recycled polypropylene into premium industrial-grade granules used by global converters and OEMs."
+        subtitle="We convert recycled polypropylene into premium industrial-grade granules used by global manufacturers and OEMs."
       />
 
       <Section>

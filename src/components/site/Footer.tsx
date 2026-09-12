@@ -5,10 +5,10 @@ import logo from "/Assets/logo_transparent_blue.png";
 import { CONTACT, whatsappUrl, mapUrl } from "@/data/site";
 
 const social = [
-  { icon: Linkedin, label: "LinkedIn" },
-  { icon: Twitter, label: "Twitter" },
-  { icon: Youtube, label: "YouTube" },
-  { icon: Instagram, label: "Instagram" },
+  { icon: Linkedin, label: "LinkedIn", href: CONTACT.linkedin },
+  { icon: Twitter, label: "Twitter", href: "#" },
+  { icon: Youtube, label: "YouTube", href: "#" },
+  { icon: Instagram, label: "Instagram", href: "#" },
 ];
 
 export function Footer() {
@@ -17,11 +17,11 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 md:grid-cols-4 md:px-8">
         <div className="md:col-span-1">
           <Link to="/" className="flex items-center gap-2.5">
-            <img src={logo} alt="Kohinoor Polytech" width={36} height={36} loading="lazy" className="h-9 w-9" />
+            <img src={logo} alt="Kohinoor Polytech" width={36} height={36} loading="lazy" className="h-9 w-9 object-contain" />
             <span className="font-display text-lg font-bold">Kohinoor Polytech</span>
           </Link>
           <p className="mt-4 text-sm text-muted-foreground">
-            Premium PPHP, PPCP and custom polypropylene compounds engineered from recycled polymers for global
+            Premium PCR PPHP, PCR PPCP, PCR HDPE and custom polymer compounds engineered from recycled polymers for global
             industrial manufacturing.
           </p>
           <form
@@ -44,8 +44,10 @@ export function Footer() {
             {social.map((s) => (
               <a
                 key={s.label}
-                href="#"
+                href={s.href}
                 aria-label={s.label}
+                target={s.href.startsWith("http") ? "_blank" : undefined}
+                rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="rounded-full border border-border p-2 text-muted-foreground transition-colors hover:text-foreground"
               >
                 <s.icon className="h-4 w-4" />
@@ -79,6 +81,9 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
             <li><a href={`mailto:${CONTACT.email}`} className="hover:text-foreground">{CONTACT.email}</a></li>
             <li><a href={`tel:${CONTACT.phoneRaw}`} className="hover:text-foreground">{CONTACT.phone}</a></li>
+            {CONTACT.phone2 && (
+              <li><a href={`tel:${CONTACT.phone2Raw}`} className="hover:text-foreground">{CONTACT.phone2}</a></li>
+            )}
             <li><a href={mapUrl()} target="_blank" rel="noreferrer" className="hover:text-foreground">{CONTACT.address}</a></li>
             <li><a href={whatsappUrl()} target="_blank" rel="noreferrer" className="hover:text-foreground">WhatsApp us</a></li>
           </ul>

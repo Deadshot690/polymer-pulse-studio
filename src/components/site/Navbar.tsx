@@ -25,7 +25,7 @@ export function Navbar() {
     const onScroll = () => setScrolled(window.scrollY > 20);
     const storedTheme = window.localStorage.getItem("theme");
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initialTheme = storedTheme === "dark" || (!storedTheme && systemPrefersDark) ? "dark" : "light";
+    const initialTheme = storedTheme === "light" ? "light" : "dark";
 
     setTheme(initialTheme);
     document.documentElement.classList.toggle("dark", initialTheme === "dark");
@@ -49,7 +49,7 @@ export function Navbar() {
       <div className={`transition-all duration-300 ${scrolled ? "glass-strong" : "bg-transparent"}`}>
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-8">
           <Link to="/" className="flex items-center gap-2.5">
-            <img src={logo} alt="Kohinoor Polytech" width={36} height={36} className="h-9 w-9" />
+            <img src={logo} alt="Kohinoor Polytech" width={36} height={36} className="h-9 w-9 object-contain" />
             <span className="font-display text-lg font-bold tracking-tight">Kohinoor Polytech</span>
           </Link>
 
@@ -67,6 +67,7 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2.5">
+            {/* Theme toggle commented out as requested
             <button
               type="button"
               onClick={toggleTheme}
@@ -75,6 +76,7 @@ export function Navbar() {
             >
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
+            */}
             <button onClick={() => openLead()} className="btn-primary hidden md:inline-flex">
               Request Quote
             </button>
@@ -109,6 +111,7 @@ export function Navbar() {
                   {l.label}
                 </Link>
               ))}
+              {/* Theme toggle commented out as requested
               <button
                 type="button"
                 onClick={toggleTheme}
@@ -117,6 +120,7 @@ export function Navbar() {
                 {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                 Toggle theme
               </button>
+              */}
               <button
                 onClick={() => {
                   setOpen(false);

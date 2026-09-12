@@ -1,4 +1,4 @@
-export type ProductCategory = "PPHP" | "PPCP" | "Compound" | "Masterbatch";
+export type ProductCategory = "PCR PPHP" | "PCR PPCP" | "Compound" | "PCR HDPE";
 
 export interface Product {
   slug: string;
@@ -26,11 +26,11 @@ const baseSpecs = (mfi: string, density: string) => [
 export const products: Product[] = [
   {
     slug: "pphp-injection-blue",
-    name: "PPHP Injection Grade — Blue",
-    category: "PPHP",
-    tag: "Homopolymer / PPHP",
+    name: "PCR PPHP Injection Grade — Blue",
+    category: "PCR PPHP",
+    tag: "Homopolymer / PCR PPHP",
     description:
-      "High-purity polypropylene homopolymer engineered from recycled polymers for stable injection moulding with excellent flow and colour consistency.",
+      "High-purity PCR polypropylene homopolymer engineered from recycled polymers for stable injection moulding with excellent flow and colour consistency.",
     application: "Injection moulding",
     color: "Brand blue",
     form: "Granule",
@@ -38,11 +38,11 @@ export const products: Product[] = [
   },
   {
     slug: "pphp-raffia-natural",
-    name: "PPHP Raffia Grade — Natural",
-    category: "PPHP",
-    tag: "Homopolymer / PPHP",
+    name: "PCR PPHP Raffia Grade — Natural",
+    category: "PCR PPHP",
+    tag: "Homopolymer / PCR PPHP",
     description:
-      "Consistent MFI raffia-grade homopolymer for woven sacks and tapes with high tensile performance.",
+      "Consistent MFI raffia-grade PCR homopolymer for woven sacks and tapes with high tensile performance.",
     application: "Raffia / woven",
     color: "Natural",
     form: "Granule",
@@ -50,11 +50,11 @@ export const products: Product[] = [
   },
   {
     slug: "ppcp-impact-black",
-    name: "PPCP Impact Grade — Black",
-    category: "PPCP",
-    tag: "Copolymer / PPCP",
+    name: "PCR PPCP Impact Grade — Black",
+    category: "PCR PPCP",
+    tag: "Copolymer / PCR PPCP",
     description:
-      "Impact-modified polypropylene copolymer offering superior toughness at low temperatures for demanding automotive parts.",
+      "Impact-modified PCR polypropylene copolymer offering superior toughness at low temperatures for demanding automotive parts.",
     application: "Automotive components",
     color: "Black",
     form: "Granule",
@@ -62,11 +62,11 @@ export const products: Product[] = [
   },
   {
     slug: "ppcp-thinwall-green",
-    name: "PPCP Thin-wall Grade — Green",
-    category: "PPCP",
-    tag: "Copolymer / PPCP",
+    name: "PCR PPCP Thin-wall Grade — Green",
+    category: "PCR PPCP",
+    tag: "Copolymer / PCR PPCP",
     description:
-      "High-flow copolymer optimised for thin-wall packaging with balanced stiffness and impact.",
+      "High-flow PCR copolymer optimised for thin-wall packaging with balanced stiffness and impact.",
     application: "Packaging",
     color: "Brand green",
     form: "Granule",
@@ -85,25 +85,24 @@ export const products: Product[] = [
     specs: baseSpecs("8 g/10min", "1.13 g/cm³"),
   },
   {
-    slug: "masterbatch-colour-cyan",
-    name: "Colour Masterbatch — Cyan",
-    category: "Masterbatch",
-    tag: "Masterbatch / Colour",
+    slug: "pcr-hdpe-blow-natural",
+    name: "PCR HDPE Blow & Extrusion Grade",
+    category: "PCR HDPE",
+    tag: "HDPE / Blow & Extrusion",
     description:
-      "High-loading colour masterbatch for precise, repeatable colour matching across polypropylene grades.",
-    application: "Colour dosing",
-    color: "Cyan",
-    form: "Pellet",
-    specs: baseSpecs("22 g/10min", "1.2 g/cm³"),
+      "High-density polyethylene reprocessed granules optimized for extrusion, blow moulding, containers, and industrial pipes.",
+    application: "Blow moulding & extrusion",
+    color: "Natural / Milky",
+    form: "Granule",
+    specs: baseSpecs("0.8 g/10min", "0.955 g/cm³"),
   },
 ];
 
 export const productCategories = [
-  { name: "PP Homopolymer (PPHP)", key: "PPHP", desc: "Stiff, high-purity homopolymer grades for injection, raffia and extrusion." },
-  { name: "PP Copolymer (PPCP)", key: "PPCP", desc: "Impact-resistant copolymer grades for automotive and packaging." },
+  { name: "PCR PP Homopolymer (PCR PPHP)", key: "PCR PPHP", desc: "Stiff, high-purity homopolymer grades for injection, raffia and extrusion." },
+  { name: "PCR PP Copolymer (PCR PPCP)", key: "PCR PPCP", desc: "Impact-resistant copolymer grades for automotive and packaging." },
   { name: "Custom Compounds", key: "Compound", desc: "Filled and reinforced compounds engineered to your specification." },
-  { name: "Color Masterbatch", key: "Masterbatch", desc: "Precision colour masterbatch for repeatable results." },
-  { name: "Custom Colors", key: "Masterbatch", desc: "Bespoke colour development to match your brand or part." },
+  { name: "PCR High-Density Polyethylene (PCR HDPE)", key: "PCR HDPE", desc: "Durable HDPE grades for blow moulding, pipes, drums and extrusion." },
 ];
 
 export interface Industry {
@@ -122,11 +121,11 @@ export const industries: Industry[] = [
     name: "Automotive",
     blurb: "Impact-grade copolymers for interior and under-hood components.",
     challenges: ["Low-temperature impact resistance", "Dimensional stability", "Consistent surface finish"],
-    solutions: ["Impact-modified PPCP grades", "In-line MFI monitoring", "Custom colour matching"],
-    grades: ["PPCP Impact Grade — Black", "Custom Compound — Glass Filled"],
+    solutions: ["Impact-modified PCR PPCP grades", "In-line MFI monitoring", "Custom colour matching"],
+    grades: ["PCR PPCP Impact Grade — Black", "Custom Compound — Glass Filled"],
     caseStudy: {
       problem: "An OEM needed a recycled-content grade with stable impact for interior trim.",
-      solution: "We supplied an impact-modified PPCP with validated low-temperature performance.",
+      solution: "We supplied an impact-modified PCR PPCP with validated low-temperature performance.",
       result: "15% cost reduction with no drop in part quality.",
     },
   },
@@ -135,10 +134,10 @@ export const industries: Industry[] = [
     name: "Packaging",
     blurb: "High-flow grades for thin-wall containers and closures.",
     challenges: ["High flow for thin walls", "Food-contact consistency", "Colour repeatability"],
-    solutions: ["High-flow PPCP thin-wall grades", "Colour masterbatch dosing", "Batch validation"],
-    grades: ["PPCP Thin-wall Grade — Green", "Colour Masterbatch — Cyan"],
+    solutions: ["High-flow PCR PPCP thin-wall grades", "PCR HDPE blow grades", "Batch validation"],
+    grades: ["PCR PPCP Thin-wall Grade — Green", "PCR HDPE Blow & Extrusion Grade"],
     caseStudy: {
-      problem: "A converter faced short shots on thin-wall tubs.",
+      problem: "A manufacturer faced short shots on thin-wall tubs.",
       solution: "A 35 MFI copolymer improved fill and cycle time.",
       result: "12% faster cycles and fewer rejects.",
     },
@@ -148,8 +147,8 @@ export const industries: Industry[] = [
     name: "Paint Industry",
     blurb: "Durable pails and containers for paints and coatings.",
     challenges: ["Chemical resistance", "Stackable strength", "UV stability"],
-    solutions: ["Homopolymer pail grades", "Reinforced compounds", "UV masterbatch"],
-    grades: ["PPHP Injection Grade — Blue"],
+    solutions: ["Homopolymer pail grades", "Reinforced compounds", "PCR HDPE containers"],
+    grades: ["PCR PPHP Injection Grade — Blue", "PCR HDPE Blow & Extrusion Grade"],
     caseStudy: {
       problem: "A paint brand needed sturdier stackable pails.",
       solution: "A stiffer homopolymer improved top-load strength.",
@@ -161,11 +160,11 @@ export const industries: Industry[] = [
     name: "Household",
     blurb: "Consumer goods with vibrant, consistent colour.",
     challenges: ["Aesthetic finish", "Colour range", "Cost efficiency"],
-    solutions: ["Injection PPHP grades", "Custom colour development"],
-    grades: ["PPHP Injection Grade — Blue", "Colour Masterbatch — Cyan"],
+    solutions: ["Injection PCR PPHP grades", "Custom colour development"],
+    grades: ["PCR PPHP Injection Grade — Blue", "PCR PPCP Thin-wall Grade — Green"],
     caseStudy: {
       problem: "A houseware maker wanted premium colours at scale.",
-      solution: "Bespoke masterbatch matched the brand palette.",
+      solution: "Bespoke PCR compound matched the brand palette.",
       result: "Consistent colour across 8 product lines.",
     },
   },
@@ -175,7 +174,7 @@ export const industries: Industry[] = [
     blurb: "Raffia and fibre grades for woven products.",
     challenges: ["Tensile strength", "Consistent MFI", "Spinnability"],
     solutions: ["Raffia homopolymer grades", "Tight MFI control"],
-    grades: ["PPHP Raffia Grade — Natural"],
+    grades: ["PCR PPHP Raffia Grade — Natural"],
     caseStudy: {
       problem: "A weaver had tape breakage from MFI drift.",
       solution: "Our tightly controlled raffia grade stabilised output.",
@@ -187,8 +186,8 @@ export const industries: Industry[] = [
     name: "Industrial",
     blurb: "Engineered compounds for structural and technical parts.",
     challenges: ["Stiffness & strength", "Heat resistance", "Dimensional control"],
-    solutions: ["Glass-filled compounds", "Custom formulation"],
-    grades: ["Custom Compound — Glass Filled"],
+    solutions: ["Glass-filled compounds", "Custom formulation", "PCR HDPE extrusion grades"],
+    grades: ["Custom Compound — Glass Filled", "PCR HDPE Blow & Extrusion Grade"],
     caseStudy: {
       problem: "A manufacturer needed a stiffer structural bracket.",
       solution: "A 20% glass-filled compound met the load spec.",
@@ -198,10 +197,13 @@ export const industries: Industry[] = [
 ];
 
 export const CONTACT = {
-  email: "sales@kohinoorpolytech.com",
-  phone: "+91 9033786017",
-  phoneRaw: "919033786017",
-  address: "Kim Station Road, Mota Borasara, Kim 394110, Surat, Gujarat, India",
+  email: "info@kpolytech.in",
+  phone: "+91 90331 18051",
+  phoneRaw: "919033118051",
+  phone2: "+91 86752 78692",
+  phone2Raw: "918675278692",
+  address: "Plot No. 111-114, Tasnim Nagar, Unn Industrial Estate, behind Sanabil Bakery, Sachin Naka, Surat - 394210, Gujarat",
+  linkedin: "https://www.linkedin.com/company/pcrpolymersllp/",
 };
 
 export const whatsappUrl = (msg = "Hello Kohinoor Polytech, I'd like to inquire about your products.") =>

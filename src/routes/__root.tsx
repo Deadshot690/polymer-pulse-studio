@@ -67,7 +67,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 const TITLE = "Kohinoor Polytech — Sustainable Polymer Engineering";
 const DESC =
-  "Premium PPHP, PPCP and custom polypropylene compounds engineered from recycled polymers for global industrial manufacturing.";
+  "Premium PCR PPHP, PCR PPCP, PCR HDPE and custom polymer compounds engineered from recycled polymers for global industrial manufacturing.";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
