@@ -16,6 +16,7 @@ import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { LeadDialog } from "../components/site/LeadDialog";
 import { LeadProvider } from "../lib/lead-context";
+import { SmoothScroll } from "../components/site/SmoothScroll";
 
 function NotFoundComponent() {
   return (
@@ -101,9 +102,30 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
       <head>
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var stored = localStorage.getItem('theme');
+                if (stored === 'light') {
+                  document.documentElement.classList.remove('dark');
+                  document.documentElement.classList.add('light');
+                  document.documentElement.style.colorScheme = 'light';
+                } else {
+                  document.documentElement.classList.add('dark');
+                  document.documentElement.classList.remove('light');
+                  document.documentElement.style.colorScheme = 'dark';
+                }
+              } catch (e) {
+                document.documentElement.classList.add('dark');
+                document.documentElement.style.colorScheme = 'dark';
+              }
+            `,
+          }}
+        />
       </head>
       <body>
         {children}
@@ -119,6 +141,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <LeadProvider>
+        <SmoothScroll />
         <Navbar />
         <main className="min-h-screen pt-16">
           <Outlet />

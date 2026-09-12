@@ -62,7 +62,6 @@ export function Footer() {
             <li><Link to="/about" className="hover:text-foreground">About</Link></li>
             <li><Link to="/projects" className="hover:text-foreground">Projects</Link></li>
             <li><Link to="/gallery" className="hover:text-foreground">Gallery</Link></li>
-            <li><Link to="/blog" className="hover:text-foreground">Insights</Link></li>
             <li><Link to="/sustainability" className="hover:text-foreground">Sustainability</Link></li>
           </ul>
         </div>
@@ -71,7 +70,6 @@ export function Footer() {
           <h4 className="font-display text-sm font-semibold">Products</h4>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
             <li><Link to="/products" className="hover:text-foreground">Catalogue</Link></li>
-            <li><Link to="/industries" className="hover:text-foreground">Industries</Link></li>
             <li><Link to="/contact" className="hover:text-foreground">Request a quote</Link></li>
           </ul>
         </div>

@@ -9,7 +9,7 @@ import { Section, SectionHeader, Reveal } from "@/components/site/Section";
 import { ParticleField } from "@/components/three/ParticleField";
 import { GranuleSphere } from "@/components/three/GranuleSphere";
 import { useLead } from "@/lib/lead-context";
-import { industries, productCategories } from "@/data/site";
+import { productCategories } from "@/data/site";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -19,7 +19,7 @@ const stats = [
   { v: "8+", l: "Years of expertise" },
   { v: "6k MT", l: "Annual capacity" },
   { v: "25+", l: "Polymer grades" },
-  { v: "6", l: "Industries served" },
+  { v: "99.8%", l: "Quality pass rate" },
 ];
 
 const features = [
@@ -235,22 +235,6 @@ function Home() {
         </div>
         <div className="mt-8">
           <Link to="/products" className="btn-primary">View the full catalogue <ArrowRight className="h-4 w-4" /></Link>
-        </div>
-      </Section>
-
-      {/* INDUSTRIES */}
-      <Section className="border-t border-border">
-        <SectionHeader center eyebrow="Industries served" title="Trusted across seven verticals." />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {industries.map((ind, i) => (
-            <Reveal key={ind.slug} delay={i * 0.04}>
-              <Link to="/industries/$slug" params={{ slug: ind.slug }} className="glass card-lift block h-full rounded-2xl p-6">
-                <Factory className="h-6 w-6 text-brand" />
-                <div className="mt-3 font-display text-lg font-semibold">{ind.name}</div>
-                <p className="mt-2 text-sm text-muted-foreground">{ind.blurb}</p>
-              </Link>
-            </Reveal>
-          ))}
         </div>
       </Section>
 
