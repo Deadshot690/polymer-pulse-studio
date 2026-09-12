@@ -16,17 +16,17 @@ export const Route = createFileRoute("/")({
 });
 
 const stats = [
-  { v: "12+", l: "Years of expertise" },
-  { v: "20k T", l: "Annual capacity" },
-  { v: "60+", l: "Polymer grades" },
-  { v: "7", l: "Industries served" },
+  { v: "8+", l: "Years of expertise" },
+  { v: "6k MT", l: "Annual capacity" },
+  { v: "25+", l: "Polymer grades" },
+  { v: "6", l: "Industries served" },
 ];
 
 const features = [
   { icon: Boxes, t: "Homopolymer", s: "PCR PPHP" },
   { icon: Recycle, t: "Copolymer", s: "PCR PPCP" },
-  { icon: FlaskConical, t: "Compounds", s: "Custom" },
   { icon: Layers, t: "HDPE", s: "PCR HDPE / Blow & Extrusion" },
+  { icon: FlaskConical, t: "Customized Compounds", s: "PCR Compounds" },
 ];
 
 const loopSteps = [
@@ -62,11 +62,11 @@ const swatches = [
 ];
 
 const mfgStats = [
-  { v: "12+", l: "Years operating" },
-  { v: "20,000 T", l: "Annual production capacity" },
-  { v: "60+", l: "Product variants" },
-  { v: "7", l: "Industries served" },
-  { v: "250+", l: "Active clients" },
+  { v: "8+", l: "Years operating" },
+  { v: "6k MT", l: "Annual production capacity" },
+  { v: "25+", l: "Product variants" },
+  { v: "6", l: "Industries served" },
+  { v: "110+", l: "Active clients" },
 ];
 
 const susStats = [
@@ -143,7 +143,7 @@ function Home() {
             <SectionHeader
               eyebrow="Who we are"
               title="A polymer engineering company built around the circular economy."
-              subtitle="Kohinoor Polytech converts post-consumer and post-industrial polypropylene and polyethylene into premium PCR PPHP, PCR PPCP, PCR HDPE and custom-engineered compounds. Every batch is validated for MFI stability, impurity control and colour consistency before it leaves our plant."
+              subtitle="Kohinoor Polytech converts post-consumer and post-industrial polymers into premium and polyethylene into premium PPHP, PPCP, HDPE and custom-engineered compounds. Every batch is validated for impurity control and colour consistency before it leaves our plant."
             />
             <div className="mt-8 grid grid-cols-2 gap-3">
               {features.map((f) => (
@@ -185,8 +185,8 @@ function Home() {
         <SectionHeader
           center
           eyebrow="The circular economy"
-          title="From waste stream to premium granule."
-          subtitle="Our closed-loop process turns discarded polypropylene into industrial-grade material — verified at every stage."
+          title="From waste stream to premium granules."
+          subtitle="Our closed-loop process turns discarded polymers into industrial-grade material — verified at every stage."
         />
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {loopSteps.map((s, i) => (
@@ -259,7 +259,6 @@ function Home() {
         <SectionHeader
           eyebrow="Manufacturing excellence"
           title="A factory engineered for precision and scale."
-          subtitle="Twin-screw extrusion lines, in-line MFI monitoring and a fully equipped polymer lab — operating around the clock with stringent QC checkpoints."
         />
         <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-5">
           {mfgStats.map((s) => (

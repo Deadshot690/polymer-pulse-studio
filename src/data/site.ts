@@ -101,8 +101,8 @@ export const products: Product[] = [
 export const productCategories = [
   { name: "PCR PP Homopolymer (PCR PPHP)", key: "PCR PPHP", desc: "Stiff, high-purity homopolymer grades for injection, raffia and extrusion." },
   { name: "PCR PP Copolymer (PCR PPCP)", key: "PCR PPCP", desc: "Impact-resistant copolymer grades for automotive and packaging." },
-  { name: "Custom Compounds", key: "Compound", desc: "Filled and reinforced compounds engineered to your specification." },
   { name: "PCR High-Density Polyethylene (PCR HDPE)", key: "PCR HDPE", desc: "Durable HDPE grades for blow moulding, pipes, drums and extrusion." },
+  { name: "Custom Compounds", key: "Compound", desc: "Filled and reinforced compounds engineered to your specification." },
 ];
 
 export interface Industry {

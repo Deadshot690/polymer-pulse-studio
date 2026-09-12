@@ -51,7 +51,7 @@ function Sustainability() {
         </div>
       </Section>
 
-      <Section className="border-t border-border">
+      {/* <Section className="border-t border-border">
         <SectionHeader center eyebrow="ESG framework" title="Responsible on every axis." />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {esg.map((e, i) => (
@@ -64,7 +64,7 @@ function Sustainability() {
             </Reveal>
           ))}
         </div>
-      </Section>
+      </Section> */}
 
       <Section className="border-t border-border">
         <SectionHeader center eyebrow="Circular process" title="Closing the loop, stage by stage." />
